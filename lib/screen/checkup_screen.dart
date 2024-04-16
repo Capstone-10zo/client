@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../shared/colors.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class Checkup extends StatefulWidget {
   @override
@@ -9,6 +11,20 @@ class Checkup extends StatefulWidget {
 }
 
 class _CheckupState extends State<Checkup> {
+  XFile? _image; // 이미지 담을 변수
+  final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
+
+  //이미지를 가져오는 함수
+  Future getImage(ImageSource imageSource) async {
+    //pickedFile에 ImagePicker로 가져온 이미지가 담긴다.
+    final XFile? pickedFile = await picker.pickImage(source: imageSource);
+    if (pickedFile != null) {
+      setState(() {
+        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +60,27 @@ class _CheckupState extends State<Checkup> {
               SizedBox(height: 20.0), // 여백
               // 안구
               _EyesButton(),
+              Container(
+                color: Colors.grey,
+                height: 100,
+                width: 100,
+                child: (_image != null)
+                    ? Image.file(
+                        File(_image!.path),
+                        fit: BoxFit.cover,
+                      )
+                    : const Icon(
+                        Icons.image,
+                        size: 50,
+                        color: Colors.white,
+                      ),
+              ),
               SizedBox(height: 20.0),
               // 피부
-              _SkinButton(),
+              //_SkinButton(),
               SizedBox(height: 20.0),
               // 슬개골
-              _BoneButton(),
+              //_BoneButton(),
             ],
           ),
         ),
@@ -57,6 +88,7 @@ class _CheckupState extends State<Checkup> {
     );
   }
 
+  // 뒤로가기 버튼
   IconButton BackButton() {
     return IconButton(
       icon: Icon(
@@ -69,22 +101,16 @@ class _CheckupState extends State<Checkup> {
       },
     );
   }
-}
 
-// 안구 버튼
-class _EyesButton extends StatelessWidget {
-  const _EyesButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+  // 안구 버튼
+  ElevatedButton _EyesButton() {
     return ElevatedButton(
       onPressed: () {
+        _showBottomSheet();
       },
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(
-            MediaQuery.of(context).size.width,
-            (MediaQuery.of(context).size.height - 250) /
-                3), // Set this
+        minimumSize: Size(MediaQuery.of(context).size.width,
+            (MediaQuery.of(context).size.height - 250) / 3), // Set this
         backgroundColor: PRIMARY_COLOR,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -94,10 +120,73 @@ class _EyesButton extends StatelessWidget {
         '안구',
         textAlign: TextAlign.left,
         style: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: BACK_COLOR,
-            fontSize: 25.0),
+            fontWeight: FontWeight.w700, color: BACK_COLOR, fontSize: 25.0),
       ),
+    );
+  }
+
+  // 사진 등록 모달창(하단)
+  _showBottomSheet() {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(15),
+        ),
+      ),
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: PRIMARY_COLOR,
+            borderRadius: BorderRadius.all(
+              Radius.circular(15), // 모달 전체 라운딩 처리
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  getImage(ImageSource.camera); //getImage 함수를 호출해서 카메라로 찍은 사진 가져오기
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: PRIMARY_COLOR,
+                  minimumSize: const Size.fromHeight(50),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  '사진 찍기',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontSize: 15.0),
+                ),
+              ),
+              const Divider(
+                thickness: 3,
+                color: Colors.white,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  getImage(ImageSource.gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: PRIMARY_COLOR,
+                  minimumSize: const Size.fromHeight(50),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  '갤러리에서 불러오기',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontSize: 15.0),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -109,13 +198,10 @@ class _SkinButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-      },
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(
-            MediaQuery.of(context).size.width,
-            (MediaQuery.of(context).size.height - 250) /
-                3), // Set this
+        minimumSize: Size(MediaQuery.of(context).size.width,
+            (MediaQuery.of(context).size.height - 250) / 3), // Set this
         backgroundColor: BEIGE_COLOR,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -125,9 +211,7 @@ class _SkinButton extends StatelessWidget {
         '피부',
         textAlign: TextAlign.left,
         style: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: GREY_COLOR,
-            fontSize: 25.0),
+            fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
       ),
     );
   }
@@ -140,13 +224,10 @@ class _BoneButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-      },
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(
-            MediaQuery.of(context).size.width,
-            (MediaQuery.of(context).size.height - 250) /
-                3), // Set this
+        minimumSize: Size(MediaQuery.of(context).size.width,
+            (MediaQuery.of(context).size.height - 250) / 3), // Set this
         backgroundColor: YELLOW_COLOR,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -156,9 +237,7 @@ class _BoneButton extends StatelessWidget {
         '슬개골',
         textAlign: TextAlign.left,
         style: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: GREY_COLOR,
-            fontSize: 25.0),
+            fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
       ),
     );
   }
