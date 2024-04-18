@@ -62,8 +62,8 @@ class _CheckupState extends State<Checkup> {
               _EyesButton(),
               Container(
                 color: Colors.grey,
-                height: 100,
-                width: 100,
+                height: MediaQuery.of(context).size.width - 40,
+                width: MediaQuery.of(context).size.width - 40,
                 child: (_image != null)
                     ? Image.file(
                         File(_image!.path),
