@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../shared/colors.dart';
+import 'package:pawsitive/screen/checkup/checkup_result.dart';
+import '../../shared/colors.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
@@ -60,7 +61,8 @@ class _CheckupState extends State<Checkup> {
               SizedBox(height: 20.0), // 여백
               // 안구
               _EyesButton(),
-              Container(
+              // 사진 보기
+              /*Container(
                 color: Colors.grey,
                 height: MediaQuery.of(context).size.width - 40,
                 width: MediaQuery.of(context).size.width - 40,
@@ -74,13 +76,13 @@ class _CheckupState extends State<Checkup> {
                         size: 50,
                         color: Colors.white,
                       ),
-              ),
+              ),*/
               SizedBox(height: 20.0),
               // 피부
-              //_SkinButton(),
+              _SkinButton(),
               SizedBox(height: 20.0),
               // 슬개골
-              //_BoneButton(),
+              _BoneButton(),
             ],
           ),
         ),
@@ -198,7 +200,10 @@ class _SkinButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => CheckupResult()));
+      },
       style: ElevatedButton.styleFrom(
         minimumSize: Size(MediaQuery.of(context).size.width,
             (MediaQuery.of(context).size.height - 250) / 3), // Set this

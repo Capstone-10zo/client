@@ -5,7 +5,7 @@ import 'package:pawsitive/screen/alert.dart';
 import 'package:pawsitive/screen/chatbot/chatbot_screen.dart';
 import 'package:pawsitive/screen/mypage.dart';
 import '../shared/colors.dart';
-import 'checkup_screen.dart';
+import 'checkup/checkup_screen.dart';
 import 'hospital_screen.dart';
 
 class HomePage extends StatefulWidget {
