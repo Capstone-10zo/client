@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pawsitive/screen/alert.dart';
 import 'package:pawsitive/screen/chatbot/chatbot_screen.dart';
-import 'package:pawsitive/screen/mypage.dart';
+import 'package:pawsitive/screen/mypage_screen.dart';
+import 'package:pawsitive/screen/pedia/pedia_screen.dart';
 import '../shared/colors.dart';
 import 'checkup/checkup_screen.dart';
-import 'hospital_screen.dart';
+import 'emotion/emotion_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -41,8 +42,8 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Row(
                   children: [
-                    //동물병원 찾기
-                    _HospitalButton(),
+                    //감정 상태 분석
+                    _EmotionButton(),
                     SizedBox(width: 20.0), // 여백
                     //AI 수의사 상담받기
                     _ChatbotButton()
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20.0), // 여백
               // 예방접종
-              _TextButton1(),
+              _PediaButton(),
               SizedBox(height: 10.0), // 여백
               // 메모하기
               _TextButton2(),
@@ -126,16 +127,16 @@ class _CheckupButton extends StatelessWidget {
   }
 }
 
-// 동물병원 찾기 버튼
-class _HospitalButton extends StatelessWidget {
-  const _HospitalButton({super.key});
+// 감정상태 분석 버튼
+class _EmotionButton extends StatelessWidget {
+  const _EmotionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => Hospital()));
+            context, MaterialPageRoute(builder: (_) => Emotion()));
       },
       style: ElevatedButton.styleFrom(
         minimumSize: Size(
@@ -148,7 +149,7 @@ class _HospitalButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        '동물병원\n찾기',
+        '감정 상태\n분석',
         textAlign: TextAlign.left,
         style: TextStyle(
             fontWeight: FontWeight.w700,
@@ -191,15 +192,16 @@ class _ChatbotButton extends StatelessWidget {
   }
 }
 
-// 예방접종 내역 확인 버튼(임시)
-class _TextButton1 extends StatelessWidget {
-  const _TextButton1({super.key});
+// 질병 백과
+class _PediaButton extends StatelessWidget {
+  const _PediaButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        print('TextButton Button');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => Pedia()));
       },
       style: TextButton.styleFrom(
         minimumSize: Size.zero,
@@ -212,13 +214,15 @@ class _TextButton1 extends StatelessWidget {
         color: BLACK_COLOR,
       ),
       label: Text(
-        '예방접종 내역 확인하기',
+        '질병 백과',
         textAlign: TextAlign.left,
         style: TextStyle(
             fontWeight: FontWeight.w700,
             color: BLACK_COLOR,
             fontSize: 20.0),
       ),
+
+
     );
   }
 }
