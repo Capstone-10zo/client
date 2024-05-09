@@ -82,6 +82,9 @@ class _CheckupResultState extends State<CheckupResult> {
       ),
       onPressed: () {
         Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
       },
     );
   }

@@ -31,19 +31,11 @@ class _LoadingState extends State<Loading> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                // 나중에 빼기
-                // 상단바
-                children: [
-                  backButton(),
-                  Spacer(),
-                ],
-              ),
               Column(
                 children: [
                   SpinKitRing(
                     color: PRIMARY_COLOR, // 색상 설정
-                    size: 100.0, // 크기 설정
+                    size: 80.0, // 크기 설정
                     duration: Duration(seconds: 4),
                   ),
                   SizedBox(height: 20.0),
