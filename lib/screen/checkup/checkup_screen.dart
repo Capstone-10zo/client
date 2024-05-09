@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pawsitive/screen/checkup/checkup_result.dart';
+import 'package:pawsitive/screen/loading_screen.dart';
 import '../../shared/colors.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+
+import '../emotion/emotion_screen.dart';
 
 class Checkup extends StatefulWidget {
   @override
@@ -23,6 +25,8 @@ class _CheckupState extends State<Checkup> {
       setState(() {
         _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
       });
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => Loading()));
     }
   }
 
@@ -61,25 +65,11 @@ class _CheckupState extends State<Checkup> {
               SizedBox(height: 20.0), // 여백
               // 안구
               _EyesButton(),
-              // 사진 보기
-              /*Container(
-                color: Colors.grey,
-                height: MediaQuery.of(context).size.width - 40,
-                width: MediaQuery.of(context).size.width - 40,
-                child: (_image != null)
-                    ? Image.file(
-                        File(_image!.path),
-                        fit: BoxFit.cover,
-                      )
-                    : const Icon(
-                        Icons.image,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-              ),*/
               SizedBox(height: 20.0),
+
               // 피부
               _SkinButton(),
+
               SizedBox(height: 20.0),
               // 슬개골
               _BoneButton(),
@@ -123,6 +113,52 @@ class _CheckupState extends State<Checkup> {
         textAlign: TextAlign.left,
         style: TextStyle(
             fontWeight: FontWeight.w700, color: BACK_COLOR, fontSize: 25.0),
+      ),
+    );
+  }
+
+  // 피부 버튼
+  ElevatedButton _SkinButton(){
+    return ElevatedButton(
+      onPressed: () {
+        _showBottomSheet();
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(MediaQuery.of(context).size.width,
+            (MediaQuery.of(context).size.height - 250) / 3), // Set this
+        backgroundColor: BEIGE_COLOR,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
+      child: Text(
+        '피부',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
+      ),
+    );
+  }
+
+  // 슬개골 버튼
+  ElevatedButton _BoneButton(){
+    return ElevatedButton(
+      onPressed: () {
+        _showBottomSheet();
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(MediaQuery.of(context).size.width,
+            (MediaQuery.of(context).size.height - 250) / 3), // Set this
+        backgroundColor: YELLOW_COLOR,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
+      child: Text(
+        '슬개골',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
       ),
     );
   }
@@ -189,61 +225,6 @@ class _CheckupState extends State<Checkup> {
           ),
         );
       },
-    );
-  }
-}
-
-// 피부 버튼
-class _SkinButton extends StatelessWidget {
-  const _SkinButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => CheckupResult()));
-      },
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(MediaQuery.of(context).size.width,
-            (MediaQuery.of(context).size.height - 250) / 3), // Set this
-        backgroundColor: BEIGE_COLOR,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-      ),
-      child: Text(
-        '피부',
-        textAlign: TextAlign.left,
-        style: TextStyle(
-            fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
-      ),
-    );
-  }
-}
-
-// 슬개골 버튼
-class _BoneButton extends StatelessWidget {
-  const _BoneButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(MediaQuery.of(context).size.width,
-            (MediaQuery.of(context).size.height - 250) / 3), // Set this
-        backgroundColor: YELLOW_COLOR,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-      ),
-      child: Text(
-        '슬개골',
-        textAlign: TextAlign.left,
-        style: TextStyle(
-            fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
-      ),
     );
   }
 }
