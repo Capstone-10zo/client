@@ -32,167 +32,473 @@ class _PediaState extends State<Pedia> {
                     fontWeight: FontWeight.w700,
                     color: BLACK_COLOR,
                     fontSize: 25.0),
+                textAlign: TextAlign.start,
               ),
               SizedBox(height: 20.0), // 여백
 
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => Pedia1()));
-                    },
-                    child: Container(
-                      height: 80,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: PRIMARY_COLOR, width: 1),
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.3,
-                            blurRadius: 10.0,
-                            offset: Offset(0, 8), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
-                          SizedBox(width: 10.0), // 여백
-                          Text(
-                            '백내장',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: BLACK_COLOR,
-                                fontSize: 20.0),
-                            textAlign: TextAlign.start,
+                          // 백내장
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '백내장',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          SizedBox(width: 10.0), // 여백
-
-                          Text(
-                            '백내장은 눈의 수정체가 흐려... ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: BLACK_COLOR,
-                                fontSize: 20.0),
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            softWrap: false,
+                
+                          SizedBox(width: 20.0), // 여백
+                
+                          // 결막염
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '결막염',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: PRIMARY_COLOR,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0), // 여백
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => Pedia1()));
-                    },
-                    child: Container(
-                      height: 80,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: PRIMARY_COLOR, width: 1),
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.3,
-                            blurRadius: 10.0,
-                            offset: Offset(0, 8), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
+                
+                      SizedBox(height: 20.0), // 여백
+                
+                      // 둘째 줄
+                      Row(
                         children: [
-                          SizedBox(width: 10.0), // 여백
-                          Text(
-                            '백내장',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: BLACK_COLOR,
-                                fontSize: 20.0),
-                            textAlign: TextAlign.start,
+                          // 백내장
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: BEIGE_COLOR,
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '백내장',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: GREY_COLOR,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          SizedBox(width: 10.0), // 여백
-
-                          Text(
-                            '백내장은 눈의 수정체가 흐려... ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: BLACK_COLOR,
-                                fontSize: 20.0),
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            softWrap: false,
+                
+                          SizedBox(width: 20.0), // 여백
+                
+                          // 결막염
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: YELLOW_COLOR,
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '결막염',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: GREY_COLOR,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => Pedia1()));
-                    },
-                    child: Container(
-                      height: 80,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: PRIMARY_COLOR, width: 1),
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.3,
-                            blurRadius: 10.0,
-                            offset: Offset(0, 8), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
+                
+                      SizedBox(height: 20.0), // 여백
+                
+                      // 셋째줄
+                      Row(
                         children: [
-                          SizedBox(width: 10.0), // 여백
-                          Text(
-                            '백내장',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: BLACK_COLOR,
-                                fontSize: 20.0),
-                            textAlign: TextAlign.start,
+                          // 백내장
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '백내장',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          SizedBox(width: 10.0), // 여백
-
-                          Text(
-                            '백내장은 눈의 수정체가 흐려... ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: BLACK_COLOR,
-                                fontSize: 20.0),
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            softWrap: false,
+                
+                          SizedBox(width: 20.0), // 여백
+                
+                          // 결막염
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '결막염',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
+                
+                      SizedBox(height: 20.0), // 여백
+                
+                      // 넷째 줄
+                      Row(
+                        children: [
+                          // 백내장
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '백내장',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                
+                          SizedBox(width: 20.0), // 여백
+                
+                          // 결막염
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '결막염',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                
+                      SizedBox(height: 20.0), // 여백
+                
+                      // 다섯째 줄
+                      Row(
+                        children: [
+                          // 백내장
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '백내장',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                
+                          SizedBox(width: 20.0), // 여백
+                
+                          // 결막염
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '결막염',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20.0), // 여백
+
+                      Row(
+                        children: [
+                          // 백내장
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '백내장',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                
+                          SizedBox(width: 20.0), // 여백
+                
+                          // 결막염
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => Pedia1()));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: (MediaQuery.of(context).size.width - 60)/2,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: PRIMARY_COLOR,
+                                border: Border.all(color: PRIMARY_COLOR, width: 1),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10.0), // 여백
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width - 60)/2 - 32,
+                                    child: Text(
+                                      '결막염',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20.0),
-                ],
+                ),
               ),
             ],
           ),

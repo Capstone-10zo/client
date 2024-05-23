@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pawsitive/screen/loading_screen.dart';
 import '../../shared/colors.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../emotion/emotion_screen.dart';
 
@@ -14,7 +17,7 @@ class Checkup extends StatefulWidget {
 }
 
 class _CheckupState extends State<Checkup> {
-  XFile? _image; // 이미지 담을 변수
+  dynamic sendData;
   final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
 
   //이미지를 가져오는 함수
@@ -22,9 +25,8 @@ class _CheckupState extends State<Checkup> {
     //pickedFile에 ImagePicker로 가져온 이미지가 담긴다.
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
     if (pickedFile != null) {
-      setState(() {
-        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
-      });
+      sendData = pickedFile.path;
+      postRequest();
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => Loading()));
     }
@@ -161,6 +163,24 @@ class _CheckupState extends State<Checkup> {
             fontWeight: FontWeight.w700, color: GREY_COLOR, fontSize: 25.0),
       ),
     );
+  }
+
+  postRequest() async {
+    File imageFile = File(sendData);
+    List<int> imageBytes = imageFile.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
+    print(base64Image);
+    Uri url = Uri.parse('http://172.30.1.88:8080/api2');
+    http.Response response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      }, // this header is essential to send json data
+      body: jsonEncode([
+        {'image': '$base64Image'}
+      ]),
+    );
+    print(response.body);
   }
 
   // 사진 등록 모달창(하단)
