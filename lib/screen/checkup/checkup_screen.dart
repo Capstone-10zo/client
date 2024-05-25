@@ -6,6 +6,7 @@ import '../../shared/colors.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
+
 import '../emotion/emotion_screen.dart';
 
 class Checkup extends StatefulWidget {
@@ -22,11 +23,12 @@ class _CheckupState extends State<Checkup> {
     //pickedFile에 ImagePicker로 가져온 이미지가 담긴다.
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
     if (pickedFile != null) {
-      setState(() {
-        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
-      });
+      // setState(() {
+      //   _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
+      // });
+      File file = File(pickedFile.path);
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => Loading()));
+          context, MaterialPageRoute(builder: (_) => Loading(file: file)));
     }
   }
 
