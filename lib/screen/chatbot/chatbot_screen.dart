@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../../shared/colors.dart';
 
 class Chatbot extends StatefulWidget {
@@ -164,29 +166,65 @@ class _ChatbotState extends State<Chatbot> with WidgetsBindingObserver {
     );
   }
 
-  void _handleSubmitted(String text) {
+  void _handleSubmitted(String text) async {
     _textController.clear();
-    
+
     // 보내는 메시지
     var userMessage = ChatMessage(
       text: text,
     );
-    
-    // 답장 오는 메시지
-    var botMessage = ChatMessage(
-      text: "알겠습니다.",
-      isBotMessage: true,
-      botMessageColor: YELLOW_COLOR,
-      botTextStyle: TextStyle(
-        fontWeight: FontWeight.w600,
-        color: GREY_COLOR,
-        fontSize: 15.0,
-      ),
-    );
+
     setState(() {
       _messages.add(userMessage);
-      _messages.add(botMessage);
     });
+
+    // Send the HTTP POST request
+    // Uri.parse('http://172.30.1.88:8080/chatbot'),
+    var response = await http.post(
+      Uri.parse('http://121.167.40.212:8080/chatbot'),
+      headers: {'Content-Type': 'text/plain'}, // content-type을 text/plain으로 설정
+      body: text, // body에 직접 텍스트를 전달
+    );
+
+    if (response.statusCode == 200) {
+
+      // Parse the response
+      var responseBody = jsonDecode(response.body);
+      var botMessageText = responseBody['예측 답변'];
+
+      // 답장 오는 메시지
+      var botMessage = ChatMessage(
+        text: botMessageText,
+        isBotMessage: true,
+        botMessageColor: YELLOW_COLOR,
+        botTextStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: GREY_COLOR,
+          fontSize: 15.0,
+        ),
+      );
+
+      setState(() {
+        _messages.add(botMessage);
+      });
+    } else {
+      // Handle error response
+      var errorMessage = ChatMessage(
+        text: "죄송합니다. 오류가 발생했습니다.",
+        isBotMessage: true,
+        botMessageColor: YELLOW_COLOR,
+        botTextStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: GREY_COLOR,
+          fontSize: 15.0,
+        ),
+      );
+
+      setState(() {
+        _messages.add(errorMessage);
+      });
+    }
+
     _scrollToBottom();
   }
 
@@ -227,7 +265,7 @@ class ChatMessage extends StatelessWidget {
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25),
               topRight: Radius.circular(25),
-              bottomLeft: isBotMessage ? Radius.circular(0) :  Radius.circular(25),
+              bottomLeft: isBotMessage ? Radius.circular(0) : Radius.circular(25),
               bottomRight: isBotMessage ? Radius.circular(25) : Radius.circular(0),
             ),
           ),
